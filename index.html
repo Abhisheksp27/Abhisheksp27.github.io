@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abhishek SP — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --card: #1a1a24;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --accent3: #43e97b;
+      --text: #e8e8f0;
+      --muted: #888899;
+      --border: rgba(108,99,255,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* Gradient blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob1 { width: 500px; height: 500px; background: var(--accent); top: -150px; left: -150px; }
+    .blob2 { width: 400px; height: 400px; background: var(--accent2); bottom: 0; right: -100px; }
+    .blob3 { width: 300px; height: 300px; background: var(--accent3); top: 50%; left: 50%; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,15,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(108,99,255,0.12);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      width: fit-content;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 .line2 { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 1.5rem 0 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+      font-weight: 300;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+    }
+    .btn-primary:hover { background: #8079ff; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(108,99,255,0.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.4s ease both;
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* SECTION HEADINGS */
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+    }
+    .skill-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text);
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .skill-chip:hover {
+      border-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+      transform: translateY(-2px);
+      color: var(--accent);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .exp-card:hover { border-color: rgba(108,99,255,0.4); transform: translateX(4px); }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .exp-company { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.3rem; font-weight: 500; }
+    .exp-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(108,99,255,0.1);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .exp-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-top: 0.5rem; }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+    .about-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .about-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    .about-card.wide { grid-column: 1 / -1; }
+
+    /* AWARDS */
+    .awards-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .award-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .award-badge:hover { border-color: var(--accent3); color: var(--accent3); }
+    .award-icon { font-size: 1.1rem; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    .contact-item:hover { border-color: var(--accent); transform: translateY(-2px); color: var(--accent); }
+    .contact-icon { font-size: 1.3rem; }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.2rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-card.wide { grid-column: 1; }
+      .hero-stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <nav>
+    <a class="nav-logo" href="#hero">Abhishek<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-tag">🟢 Open to opportunities</div>
+    <h1>Abhishek SP<br><span class="line2">Order & Ops.</span></h1>
+    <p class="hero-sub">Order Management Specialist with hands-on experience across EdTech, Electronics, and E-commerce. Currently levelling up in Data Analytics 📊</p>
+    <div class="hero-cta">
+      <a href="mailto:abhisheksp27@gmail.com" class="btn btn-primary">✉️ Get in touch</a>
+      <a href="#experience" class="btn btn-outline">View Experience →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div>
+        <div class="stat-num">10<span>+</span></div>
+        <div class="stat-label">Tools Mastered</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Awards Won</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="reveal">
+      <div class="section-label">What I work with</div>
+      <h2>Tools & Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-chip">Salesforce</div>
+        <div class="skill-chip">SAP Ariba</div>
+        <div class="skill-chip">Coupa</div>
+        <div class="skill-chip">Taulia</div>
+        <div class="skill-chip">Oracle SIEBEL</div>
+        <div class="skill-chip">BPCS</div>
+        <div class="skill-chip">Rootstock</div>
+        <div class="skill-chip">Microsoft Excel</div>
+        <div class="skill-chip">MS Office</div>
+        <div class="skill-chip">Order Management</div>
+        <div class="skill-chip">Data Entry</div>
+        <div class="skill-chip">Data Analytics 📊</div>
+        <div class="skill-chip">ERP/CRM Systems</div>
+        <div class="skill-chip">Risk & Compliance</div>
+        <div class="skill-chip">Process Improvement</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="reveal">
+      <div class="section-label">Where I've worked</div>
+      <h2>Experience</h2>
+      <div class="exp-list">
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Order Management – Entry Specialist</div>
+              <div class="exp-company">Curriculum Associates (EdTech)</div>
+            </div>
+            <div class="exp-date">Feb 2023 – Present</div>
+          </div>
+          <p class="exp-desc">Streamlined bulk data entry, implemented order tracking categorisation, maintained PO billing compliance, and managed end-to-end order processing across Rootstock and Salesforce. Handled diverse order types — PDQ, IDELL, Legacy, Truck, Digital, Print.</p>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Customer Support – Order Management Specialist</div>
+              <div class="exp-company">Element 14</div>
+            </div>
+            <div class="exp-date">Jan 2022 – Jan 2023</div>
+          </div>
+          <p class="exp-desc">Managed high-volume POs and sales quotes, verified credit limits and contracts, coordinated with sales & finance teams, tracked order trends for demand forecasting, and drove process improvements to reduce turnaround time.</p>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Transaction Risk Investigator</div>
+              <div class="exp-company">Amazon India Pvt Ltd</div>
+            </div>
+            <div class="exp-date">Feb 2021 – Oct 2021</div>
+          </div>
+          <p class="exp-desc">Investigated fraudulent transactions, analysed buyer/seller trends, applied critical thinking to assess claim validity, and flagged unauthorized purchases to prevent financial losses.</p>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Customer Support Executive & Sourcing</div>
+              <div class="exp-company">Quikr India Pvt Ltd</div>
+            </div>
+            <div class="exp-date">Jun 2019 – Feb 2021</div>
+          </div>
+          <p class="exp-desc">Managed customer inquiries, resolved issues, generated leads for online furniture sales, categorised product features, and converted sellers into successful leads.</p>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Co-ordinator – Estimates</div>
+              <div class="exp-company">CPMC Relocation and Logistics Pvt Ltd</div>
+            </div>
+            <div class="exp-date">Mar 2024 – Present</div>
+          </div>
+          <p class="exp-desc">Generated invoice billing numbers, managed vendor requests, negotiated with transportation companies, and co-ordinated full relocation logistics for clients.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <div class="section-label">A little about me</div>
+      <h2>About</h2>
+      <div class="about-grid">
+        <div class="about-card wide">
+          <h3>👋 Hey there!</h3>
+          <p>I'm Abhishek, an Order Management Specialist based in Bengaluru, India. I've spent 5+ years working across EdTech, Electronics, E-commerce, and Logistics — getting really good at making sure orders don't go sideways 😄. I'm currently on a journey to transition into Data Analytics, because I love finding patterns and insights in data.</p>
+        </div>
+        <div class="about-card">
+          <h3>🎓 Education</h3>
+          <p>Bachelor of Business Administration<br>Sheshadripuram Degree College, Bengaluru<br>Graduated April 2017</p>
+        </div>
+        <div class="about-card">
+          <h3>🎮 Outside work</h3>
+          <p>I enjoy gaming, traveling, listening to music, watching movies, and sharing a great meal with friends. I game to de-stress and can talk about movies for hours!</p>
+        </div>
+        <div class="about-card wide">
+          <h3>🏆 Certifications & Training</h3>
+          <p>Risk & Compliance Training &nbsp;•&nbsp; Global Anti Money Laundering Prevention &nbsp;•&nbsp; Seller Data Protection Training</p>
+        </div>
+      </div>
+
+      <br/>
+      <div class="section-label" style="margin-top:1rem;">Recognition</div>
+      <div class="awards-row" style="margin-top:1rem;">
+        <div class="award-badge"><span class="award-icon">⭐</span> Q3 Star Performer – May</div>
+        <div class="award-badge"><span class="award-icon">🏅</span> Q4 Extra Mile Award – Sept</div>
+        <div class="award-badge"><span class="award-icon">🤝</span> Q4 Stakeholder Appreciation – Dec</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <div class="section-label">Let's connect</div>
+      <h2>Get in touch</h2>
+      <div class="contact-grid">
+        <a class="contact-item" href="mailto:abhisheksp27@gmail.com">
+          <span class="contact-icon">✉️</span>
+          <div>
+            <div style="font-weight:500;">Email</div>
+            <div style="font-size:0.8rem; color:var(--muted);">abhisheksp27@gmail.com</div>
+          </div>
+        </a>
+        <a class="contact-item" href="tel:+918971839558">
+          <span class="contact-icon">📞</span>
+          <div>
+            <div style="font-weight:500;">Phone</div>
+            <div style="font-size:0.8rem; color:var(--muted);">+91 89718 39558</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://github.com" target="_blank">
+          <span class="contact-icon">🐙</span>
+          <div>
+            <div style="font-weight:500;">GitHub</div>
+            <div style="font-size:0.8rem; color:var(--muted);">github.com/abhisheksp</div>
+          </div>
+        </a>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div>
+            <div style="font-weight:500;">Location</div>
+            <div style="font-size:0.8rem; color:var(--muted);">Bengaluru, Karnataka, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built with ❤️ by Abhishek SP &nbsp;•&nbsp; Bengaluru, India &nbsp;•&nbsp; 2025</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
