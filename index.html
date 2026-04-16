@@ -101,6 +101,23 @@ a {
     text-decoration: none;
 }
 
+/* NEW COURSE BUTTON */
+.course-btn {
+    background: linear-gradient(45deg, #6c63ff, #ff6584);
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.course-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(108,99,255,0.4);
+}
+
 .fade {
     opacity: 0;
     transform: translateY(30px);
@@ -191,6 +208,19 @@ Focused on delivering efficient solutions and continuously enhancing business pr
 </div>
 </section>
 
+<!-- ✅ NEW COURSE SECTION -->
+<section class="fade">
+<h2>Course Training</h2>
+<p>Start learning Data Analytics through structured lessons</p>
+
+<br>
+
+<button class="course-btn" onclick="openLesson()">
+🚀 Start Lesson 1
+</button>
+
+</section>
+
 <section class="fade">
 <h2>Achievements</h2>
 <div class="grid">
@@ -230,6 +260,11 @@ Focused on delivering efficient solutions and continuously enhancing business pr
 <script>
 function toggleTheme() {
     document.body.classList.toggle("light");
+}
+
+/* NEW FUNCTION */
+function openLesson() {
+    window.open("lesson1.html", "_blank");
 }
 
 const elements = document.querySelectorAll('.fade');
