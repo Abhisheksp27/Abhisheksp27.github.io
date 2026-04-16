@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — What is Data Analytics?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+  --accent3: #43e97b;
+  --accent4: #f7971e;
+  --text: #e8e8f0;
+  --muted: #8888aa;
+  --border: rgba(108,99,255,0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Ambient glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: -200px; left: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -200px; right: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,101,132,0.08) 0%, transparent 70%);
+}
+
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+/* Header */
+.course-tag {
+  background: rgba(108,99,255,0.15);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 25px;
+  animation: fadeDown 0.6s ease;
+}
+
+.lesson-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  animation: fadeDown 0.6s 0.1s both;
+}
+.lesson-title span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lesson-subtitle {
+  color: var(--muted);
+  margin-bottom: 40px;
+  animation: fadeDown 0.6s 0.2s both;
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 30px;
+  animation: fadeUp 0.6s ease;
+}
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* Role grid */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 15px;
+}
+
+.role-card {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 20px;
+  transition: 0.3s;
+}
+.role-card:hover {
+  transform: translateY(-5px);
+}
+
+.role-number {
+  font-size: 30px;
+  opacity: 0.3;
+}
+.role-verb {
+  font-weight: 700;
+}
+
+/* Types */
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+}
+@media(max-width:600px){
+  .types-grid { grid-template-columns:1fr; }
+}
+
+.type-card {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 14px;
+}
+
+/* Process */
+.process-flow {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border-radius: 18px;
+}
+
+.process-step {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Button */
+.next-btn {
+  background: var(--accent);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fadeDown {
+  from { opacity:0; transform: translateY(-20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* Progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 5%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="page">
+
+<div class="course-tag">Phase 1 · Week 1 · Lesson 1</div>
+
+<h1 class="lesson-title">What is <span>Data Analytics?</span></h1>
+<p class="lesson-subtitle">Your first step into one of the most in-demand careers.</p>
+
+<div class="card">
+<div class="section-label">The Core Idea</div>
+<p>Data Analytics is the process of examining raw data to find patterns and make better decisions.</p>
+</div>
+
+<div class="card">
+<div class="section-label">Think Like This</div>
+<p>A data analyst is like a detective solving business problems using data.</p>
+</div>
+
+<div class="card">
+<div class="section-label">What a Data Analyst Does</div>
+
+<div class="role-grid">
+<div class="role-card"><div class="role-number">01</div><div class="role-verb">Collect</div></div>
+<div class="role-card"><div class="role-number">02</div><div class="role-verb">Clean</div></div>
+<div class="role-card"><div class="role-number">03</div><div class="role-verb">Analyze</div></div>
+<div class="role-card"><div class="role-number">04</div><div class="role-verb">Visualize</div></div>
+<div class="role-card"><div class="role-number">05</div><div class="role-verb">Recommend</div></div>
+</div>
+
+</div>
+
+<div class="card">
+<div class="section-label">4 Types of Analytics</div>
+
+<div class="types-grid">
+<div class="type-card">📊 Descriptive</div>
+<div class="type-card">🔍 Diagnostic</div>
+<div class="type-card">🔮 Predictive</div>
+<div class="type-card">⚡ Prescriptive</div>
+</div>
+
+</div>
+
+<div class="card">
+<div class="section-label">Analytics Process</div>
+
+<div class="process-flow">
+<div class="process-step">❓ Ask</div>
+<div class="process-step">📥 Collect</div>
+<div class="process-step">🧹 Clean</div>
+<div class="process-step">🔬 Analyze</div>
+<div class="process-step">📈 Visualize</div>
+<div class="process-step">🚀 Act</div>
+</div>
+
+</div>
+
+<button class="next-btn" onclick="alert('Next lesson coming soon!')">
+Next Lesson →
+</button>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = Math.min(100, 5 + (scrolled / total) * 95);
+  document.getElementById('progressBar').style.width = pct + '%';
+});
+</script>
+
+</body>
+</html>
