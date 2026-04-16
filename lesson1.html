@@ -21,7 +21,11 @@
   --border: rgba(108,99,255,0.2);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background: var(--bg);
@@ -33,22 +37,27 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient background */
+/* 🔥 EXACT BACKGROUND GLOW (THIS WAS BREAKING BEFORE) */
 body::before {
   content: '';
   position: fixed;
-  top: -200px; left: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
+
 body::after {
   content: '';
   position: fixed;
-  bottom: -200px; right: -200px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(255,101,132,0.08) 0%, transparent 70%);
+  bottom: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,101,132,0.12) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -61,7 +70,7 @@ body::after {
   z-index: 1;
 }
 
-/* Header */
+/* HEADER */
 .course-tag {
   display: inline-flex;
   align-items: center;
@@ -78,17 +87,19 @@ body::after {
   margin-bottom: 28px;
   animation: fadeDown 0.6s ease both;
 }
+
 .course-tag::before {
   content: '';
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   background: var(--accent);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,100% { opacity:1; }
+  50% { opacity:0.3; }
 }
 
 .lesson-title {
@@ -99,6 +110,7 @@ body::after {
   margin-bottom: 12px;
   animation: fadeDown 0.6s 0.1s ease both;
 }
+
 .lesson-title span {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text;
@@ -112,7 +124,7 @@ body::after {
   animation: fadeDown 0.6s 0.2s ease both;
 }
 
-/* Section label */
+/* SECTION LABEL */
 .section-label {
   font-size: 11px;
   font-weight: 600;
@@ -124,6 +136,7 @@ body::after {
   align-items: center;
   gap: 10px;
 }
+
 .section-label::after {
   content: '';
   flex: 1;
@@ -131,7 +144,7 @@ body::after {
   background: var(--border);
 }
 
-/* Definition card */
+/* DEFINITION CARD */
 .definition-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -142,34 +155,38 @@ body::after {
   overflow: hidden;
   animation: fadeUp 0.7s 0.3s ease both;
 }
+
 .definition-card::before {
   content: '"';
   position: absolute;
-  top: -20px; right: 20px;
+  top: -20px;
+  right: 20px;
   font-size: 160px;
   font-family: 'Syne', sans-serif;
   color: rgba(108,99,255,0.06);
 }
+
 .definition-card p {
   font-size: 18px;
   font-weight: 300;
   line-height: 1.8;
 }
+
 .definition-card strong {
   color: #fff;
 }
 
-/* Analogy */
+/* ANALOGY */
 .analogy {
   background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(255,101,132,0.08));
   border: 1px solid rgba(108,99,255,0.3);
   border-radius: 16px;
-  padding: 24px;
+  padding: 24px 28px;
   margin-bottom: 40px;
   animation: fadeUp 0.7s 0.4s ease both;
 }
 
-/* Role cards */
+/* ROLE GRID */
 .role-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -183,24 +200,27 @@ body::after {
   padding: 24px;
   transition: 0.2s;
 }
+
 .role-card:hover {
   transform: translateY(-3px);
 }
 
-/* Animations */
+/* ANIMATIONS */
 @keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity:0; transform:translateY(-16px); }
+  to { opacity:1; transform:translateY(0); }
 }
 
-/* Progress bar */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* PROGRESS BAR */
 .progress-bar {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   width: 5%;
