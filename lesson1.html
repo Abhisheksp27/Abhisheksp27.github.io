@@ -21,11 +21,7 @@
   --border: rgba(108,99,255,0.2);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: var(--bg);
@@ -37,80 +33,49 @@ body {
   overflow-x: hidden;
 }
 
-/* 🔥 EXACT BACKGROUND GLOW (THIS WAS BREAKING BEFORE) */
+/* Ambient background */
 body::before {
   content: '';
   position: fixed;
-  top: -200px;
-  left: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+  top: -200px; left: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
   pointer-events: none;
-  z-index: 0;
 }
-
 body::after {
   content: '';
   position: fixed;
-  bottom: -200px;
-  right: -200px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,101,132,0.12) 0%, transparent 70%);
+  bottom: -200px; right: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,101,132,0.08) 0%, transparent 70%);
   pointer-events: none;
-  z-index: 0;
 }
 
 .page {
   max-width: 860px;
-  margin: 0 auto;
+  margin: auto;
   padding: 48px 24px 80px;
-  position: relative;
-  z-index: 1;
 }
 
-/* HEADER */
+/* Header */
 .course-tag {
   display: inline-flex;
-  align-items: center;
   gap: 8px;
   background: rgba(108,99,255,0.15);
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 6px 16px;
   font-size: 12px;
-  font-weight: 500;
   color: var(--accent);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   margin-bottom: 28px;
-  animation: fadeDown 0.6s ease both;
-}
-
-.course-tag::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%,100% { opacity:1; }
-  50% { opacity:0.3; }
 }
 
 .lesson-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(32px, 6vw, 52px);
+  font-size: 48px;
   font-weight: 800;
-  line-height: 1.1;
   margin-bottom: 12px;
-  animation: fadeDown 0.6s 0.1s ease both;
 }
-
 .lesson-title span {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text;
@@ -119,104 +84,59 @@ body::after {
 
 .lesson-subtitle {
   color: var(--muted);
-  font-size: 16px;
-  margin-bottom: 48px;
-  animation: fadeDown 0.6s 0.2s ease both;
+  margin-bottom: 40px;
 }
 
-/* SECTION LABEL */
+/* Cards */
 .section-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  font-size: 12px;
   color: var(--accent);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* DEFINITION CARD */
-.definition-card {
+.definition-card, .analogy, .real-world, .homework {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 32px;
-  margin-bottom: 40px;
-  position: relative;
-  overflow: hidden;
-  animation: fadeUp 0.7s 0.3s ease both;
-}
-
-.definition-card::before {
-  content: '"';
-  position: absolute;
-  top: -20px;
-  right: 20px;
-  font-size: 160px;
-  font-family: 'Syne', sans-serif;
-  color: rgba(108,99,255,0.06);
-}
-
-.definition-card p {
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 1.8;
-}
-
-.definition-card strong {
-  color: #fff;
-}
-
-/* ANALOGY */
-.analogy {
-  background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(255,101,132,0.08));
-  border: 1px solid rgba(108,99,255,0.3);
-  border-radius: 16px;
-  padding: 24px 28px;
-  margin-bottom: 40px;
-  animation: fadeUp 0.7s 0.4s ease both;
-}
-
-/* ROLE GRID */
-.role-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 48px;
-}
-
-.role-card {
-  background: var(--surface);
-  border-radius: 16px;
   padding: 24px;
+  margin-bottom: 30px;
+}
+
+/* Grid */
+.role-grid, .types-grid, .toolkit-grid {
+  display: grid;
+  gap: 16px;
+}
+.role-grid { grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); }
+.types-grid { grid-template-columns: repeat(2,1fr); }
+.toolkit-grid { grid-template-columns: repeat(3,1fr); }
+
+/* Cards hover */
+.role-card, .type-card, .tool-card {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 16px;
   transition: 0.2s;
 }
-
-.role-card:hover {
-  transform: translateY(-3px);
+.role-card:hover, .type-card:hover, .tool-card:hover {
+  transform: translateY(-4px);
 }
 
-/* ANIMATIONS */
-@keyframes fadeDown {
-  from { opacity:0; transform:translateY(-16px); }
-  to { opacity:1; transform:translateY(0); }
+/* Bottom */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.nav-next {
+  background: var(--accent);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 100px;
+  color: white;
 }
 
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(20px); }
-  to { opacity:1; transform:translateY(0); }
-}
-
-/* PROGRESS BAR */
+/* Progress bar */
 .progress-bar {
   position: fixed;
   top: 0;
@@ -224,7 +144,6 @@ body::after {
   height: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   width: 5%;
-  z-index: 999;
 }
 </style>
 </head>
@@ -238,24 +157,48 @@ body::after {
 <div class="course-tag">Phase 1 · Week 1 · Lesson 1</div>
 
 <h1 class="lesson-title">What is<br><span>Data Analytics?</span></h1>
-<p class="lesson-subtitle">Your first step into one of the most in-demand careers of the decade.</p>
+<p class="lesson-subtitle">Your first step into one of the most in-demand careers.</p>
 
 <div class="section-label">The Core Idea</div>
 <div class="definition-card">
-<p>Data Analytics is the process of <strong>examining raw data</strong> to find patterns and make better decisions.</p>
+<p>Data Analytics is the process of examining data to find patterns and make better decisions.</p>
 </div>
 
 <div class="analogy">
-<p>A data analyst is like a detective for business problems.</p>
+<p>Think of a data analyst as a detective solving business problems.</p>
 </div>
 
-<div class="section-label">What a Data Analyst Does</div>
+<div class="section-label">What Analysts Do</div>
 <div class="role-grid">
-<div class="role-card">Collect</div>
-<div class="role-card">Clean</div>
+<div class="role-card">Collect Data</div>
+<div class="role-card">Clean Data</div>
 <div class="role-card">Analyze</div>
 <div class="role-card">Visualize</div>
 <div class="role-card">Recommend</div>
+</div>
+
+<div class="section-label">Types of Analytics</div>
+<div class="types-grid">
+<div class="type-card">Descriptive</div>
+<div class="type-card">Diagnostic</div>
+<div class="type-card">Predictive</div>
+<div class="type-card">Prescriptive</div>
+</div>
+
+<div class="section-label">Tools</div>
+<div class="toolkit-grid">
+<div class="tool-card">Excel</div>
+<div class="tool-card">SQL</div>
+<div class="tool-card">Python</div>
+</div>
+
+<div class="homework">
+<p>Homework: Think of 3 questions you can solve using data.</p>
+</div>
+
+<div class="bottom-nav">
+<div>Lesson 1</div>
+<button class="nav-next">Next →</button>
 </div>
 
 </div>
